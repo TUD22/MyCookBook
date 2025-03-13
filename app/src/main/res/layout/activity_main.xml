@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -13,10 +14,12 @@
        android:layout_height="wrap_content"
        android:orientation="horizontal">
       <Button
-          android:id="@+id/menu"
+          android:backgroundTint="#D09A1C"
+          android:id="@+id/menu_button"
           android:text="Menu"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:layout_margin="8dp"
           />
 
       <TextView
@@ -29,17 +32,41 @@
 
    </LinearLayout>
 
-   <Button
-       android:id="@+id/add_recipe"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:text="Dodaj"
-       android:visibility="gone"/>
-   <Button
-       android:visibility="gone"
-       android:id="@+id/search_recipe"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:text="Przeglądaj"/>
+   <FrameLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
 
+      <androidx.fragment.app.FragmentContainerView
+          android:id="@+id/main_fragment"
+          android:name="com.example.mycookbook.RecipeListFragment"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_weight="1" />
+         <LinearLayout
+             android:background="#FFFFFF"
+            android:padding="8dp"
+            android:id="@+id/menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+          <Button
+              android:backgroundTint="#D09A1C"
+             android:id="@+id/add_recipe"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="Dodaj" />
+         <Button
+             android:backgroundTint="#D09A1C"
+             android:id="@+id/search_recipe"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="Przeglądaj"
+             android:layout_weight="0"
+             />
+      </LinearLayout>
+
+
+
+   </FrameLayout>
 </LinearLayout>

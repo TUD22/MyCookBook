@@ -3,6 +3,7 @@ package com.example.mycookbook
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -22,16 +23,14 @@ class MainActivity : AppCompatActivity() {
         }
         val search = findViewById<Button>(R.id.search_recipe)
         val addRecipe = findViewById<Button>(R.id.add_recipe)
-        val button = findViewById<Button>(R.id.menu)
+        val button = findViewById<Button>(R.id.menu_button)
+        val menu : LinearLayout = findViewById(R.id.menu)
         var i =1
         button.setOnClickListener{
             if (i == 1) {
-                search.visibility = View.VISIBLE
-                addRecipe.visibility = View.VISIBLE
-
+                menu.visibility = View.VISIBLE
             }else{
-                search.visibility = View.GONE
-                addRecipe.visibility = View.GONE
+                menu.visibility = View.GONE
             }
                 i=-i;
         }
