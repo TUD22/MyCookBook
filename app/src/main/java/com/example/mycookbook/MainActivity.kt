@@ -8,6 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,6 +22,7 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        replaceFragment(RecipeListFragment())
         val search = findViewById<Button>(R.id.search_recipe)
         val addRecipe = findViewById<Button>(R.id.add_recipe)
         val button = findViewById<Button>(R.id.menu_button)
@@ -34,5 +36,19 @@ class MainActivity : AppCompatActivity() {
             }
                 i=-i;
         }
+        search.setOnClickListener{
+            replaceFragment(RecipeListFragment())
+        }
+        addRecipe.setOnClickListener{
+            replaceFragment(AddRecipeFragment())
+        }
+
+    }
+
+    private fun replaceFragment(fragment: Fragment){
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_fragment, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 }
