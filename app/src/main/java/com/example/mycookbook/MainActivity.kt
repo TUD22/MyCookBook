@@ -10,8 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 
-class MainActivity : AppCompatActivity() {
-
+class MainActivity : AppCompatActivity(), DataPassInterface {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,10 +44,21 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun replaceFragment(fragment: Fragment){
+    fun replaceFragment(fragment: Fragment){
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_fragment, fragment)
             .addToBackStack(null)
             .commit()
     }
+
+    override fun onDataPass(recipe: Recipe, sender: String) {
+
+        when(sender){
+            "list" ->{
+                replaceFragment(RecipeDetailsFragment())
+            }
+        }
+    }
+
+
 }

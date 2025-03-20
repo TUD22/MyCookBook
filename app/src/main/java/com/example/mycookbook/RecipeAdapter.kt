@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class RecipeAdapter(private val recipeList: List<Recipe>):
+class RecipeAdapter(private val recipeList: List<Recipe>, private val clickListener: (Recipe) -> Unit):
     RecyclerView.Adapter<RecipeAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder{
@@ -19,6 +19,10 @@ class RecipeAdapter(private val recipeList: List<Recipe>):
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val recipe = recipeList[position]
         holder.recipeName.text = recipe.nazwa
+
+        holder.itemView.setOnClickListener{
+            clickListener(recipe)
+        }
 
     }
 
