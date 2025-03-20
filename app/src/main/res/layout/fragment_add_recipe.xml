@@ -1,14 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".AddRecipeFragment">
 
-    <Button
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:backgroundTint="#123456"/>
+        android:layout_height="wrap_content"
+        android:text="Dodaj przepis"
+        android:textSize="30dp"
+        android:textAlignment="center"/>
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="10dp"/>
+    <EditText
+        android:id="@+id/edit_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="nazwa przepisu"/>
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="10dp"/>
+    <EditText
+        android:id="@+id/edit_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="opis"
+        android:minHeight="200dp"/>
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="10dp"/>
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:min="1"
+        android:max="10" />
+    <TextView
+        android:id="@+id/seek_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="15sp"
+        android:text="trudność: "/>
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="10dp"/>
+    <RatingBar
+        android:id="@+id/rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:progressTint="#D09A1C"
+        android:progressBackgroundTint="#414143"
+        android:layout_gravity="center_horizontal"/>
+    <Button
+        android:backgroundTint="#D09A1C"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/add_button"
+        android:text="dodaj"/>
 
 
-</FrameLayout>
+
+</LinearLayout>

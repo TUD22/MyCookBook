@@ -18,7 +18,7 @@ class RecipeAdapter(private val recipeList: List<Recipe>):
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val recipe = recipeList[position]
-
+        holder.recipeName.text = recipe.nazwa
 
     }
 

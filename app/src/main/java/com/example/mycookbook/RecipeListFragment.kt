@@ -43,13 +43,14 @@ class RecipeListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var recipeList = listOf(
-            Recipe("pizza", 2)
+        val recipeList = listOf(
+            Recipe("Pizza", 2, 2f, "a"),
+            Recipe("Lasagna", 4, 5f, "b"),
+            Recipe("Spaghetti", 6, 1f, "d")
         )
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
 
-        var recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
-
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = RecipeAdapter(recipeList)
     }
 
