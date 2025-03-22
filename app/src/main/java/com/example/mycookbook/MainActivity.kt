@@ -1,14 +1,17 @@
 package com.example.mycookbook
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.Switch
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
+import androidx.core.view.isGone
 
 class MainActivity : AppCompatActivity(), DataPassInterface {
 
@@ -25,26 +28,42 @@ class MainActivity : AppCompatActivity(), DataPassInterface {
         val search = findViewById<Button>(R.id.search_recipe)
         val addRecipe = findViewById<Button>(R.id.add_recipe)
         val button = findViewById<Button>(R.id.menu_button)
-        val menu : LinearLayout = findViewById(R.id.menu)
-        var i =1
-        button.setOnClickListener{
-            if (i == 1) {
+        val menu: LinearLayout = findViewById(R.id.menu)
+        val switch: Switch = findViewById(R.id.themeSwitch)
+
+        button.setOnClickListener {
+            if (menu.isGone) {
                 menu.visibility = View.VISIBLE
-            }else{
+            } else {
                 menu.visibility = View.GONE
             }
-                i=-i;
         }
-        search.setOnClickListener{
+        search.setOnClickListener {
             replaceFragment(RecipeListFragment())
+            menu.visibility = View.GONE
         }
-        addRecipe.setOnClickListener{
+        addRecipe.setOnClickListener {
             replaceFragment(AddRecipeFragment())
+            menu.visibility = View.GONE
         }
+
+        val sharedPreferences = getSharedPreferences("pref", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        switch.isChecked = (sharedPreferences.getBoolean("isOn", false))
+        var color = if(switch.isChecked) R.color.purple else R.color.yellow
+        button.setBackgroundColor(getColor(color))
+
+        switch.setOnClickListener{
+            color = if(switch.isChecked) R.color.purple else R.color.yellow
+            button.setBackgroundColor(getColor(color))
+            editor.putBoolean("isOn", switch.isChecked)
+            editor.apply()
+        }
+
 
     }
 
-    fun replaceFragment(fragment: Fragment){
+    fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_fragment, fragment)
             .addToBackStack(null)
@@ -52,13 +71,19 @@ class MainActivity : AppCompatActivity(), DataPassInterface {
     }
 
     override fun onDataPass(recipe: Recipe, sender: String) {
-
-        when(sender){
-            "list" ->{
-                replaceFragment(RecipeDetailsFragment())
-            }
+        val fragment: Fragment = when (sender) {
+            "list" -> RecipeDetailsFragment()
+            "add" -> RecipeListFragment()
+            else -> return
         }
+
+        fragment.arguments = Bundle().apply {
+            putParcelable("recipe", recipe)
+        }
+
+        replaceFragment(fragment)
+
     }
-
-
 }
+
+

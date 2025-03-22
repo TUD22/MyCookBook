@@ -2,16 +2,20 @@ package com.example.mycookbook
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
 
 
 class RecipeListFragment : Fragment() {
     private lateinit var listener: DataPassInterface
+    lateinit var recipeList: MutableList<Recipe>
+    private lateinit var adapter: RecipeAdapter
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -29,7 +33,6 @@ class RecipeListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_recipe_list, container, false)
 
     }
@@ -37,21 +40,23 @@ class RecipeListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val recipeList = listOf(
-            Recipe("Pizza", 2, 2f, "a"),
-            Recipe("Lasagna", 4, 5f, "b"),
-            Recipe("Spaghetti", 6, 1f, "d")
-        )
+        recipeList = RecipeJsonManager.getRecipeListFromJson(requireContext())
+
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = RecipeAdapter(recipeList){ recipe ->
+        adapter = RecipeAdapter(recipeList){ recipe ->
             listener.onDataPass(recipe, "list")
         }
+        recyclerView.adapter = adapter
     }
 
 
     companion object {
+
+    }
+
+    fun updateData(recipe: Recipe) {
 
     }
 }

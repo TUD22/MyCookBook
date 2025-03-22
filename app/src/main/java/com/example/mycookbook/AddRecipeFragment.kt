@@ -1,5 +1,6 @@
 package com.example.mycookbook
 
+import android.content.Context
 import android.media.Rating
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -17,6 +18,17 @@ class AddRecipeFragment : Fragment() {
     lateinit var seek : SeekBar
     lateinit var seekText : TextView
     lateinit var rating: RatingBar
+    lateinit var recipe: Recipe
+    private lateinit var listener: DataPassInterface
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if(context is DataPassInterface){
+            listener=context
+        } else {
+            throw RuntimeException("$context must implement DataPass")
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +52,6 @@ class AddRecipeFragment : Fragment() {
         seekText = view.findViewById(R.id.seek_text)
         var seekInt = 1
         rating = view.findViewById(R.id.rating)
-        var recipe: Recipe
         seek.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
                 seekText.text = "trudność: ${p1}"
@@ -58,10 +69,14 @@ class AddRecipeFragment : Fragment() {
         val button = view.findViewById<Button>(R.id.add_button)
         button.setOnClickListener{
             recipe = Recipe(name.text.toString(), seekInt, rating.rating, desc.text.toString())
+            RecipeJsonManager.addRecipeToListJson(requireContext(), recipe)
+            listener.onDataPass(recipe, "add")
         }
     }
 
     companion object {
 
     }
+
+
 }
