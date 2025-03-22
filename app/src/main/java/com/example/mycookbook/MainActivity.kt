@@ -74,6 +74,7 @@ class MainActivity : AppCompatActivity(), DataPassInterface {
         val fragment: Fragment = when (sender) {
             "list" -> RecipeDetailsFragment()
             "add" -> RecipeListFragment()
+            "details" -> AddRecipeFragment()
             else -> return
         }
 

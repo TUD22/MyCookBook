@@ -19,6 +19,12 @@ object RecipeJsonManager {
         file.writeText(gson.toJson(recipeList))
     }
 
+    fun editRecipeList(context: Context, newRecipeList: MutableList<Recipe>) {
+        val gson = Gson()
+        val file = File(context.filesDir, FILE_NAME)
+        file.writeText(gson.toJson(newRecipeList))
+    }
+
 
     fun getRecipeListFromJson(context: Context): MutableList<Recipe> {
         val gson = Gson()

@@ -15,6 +15,7 @@ import android.widget.TextView
 class AddRecipeFragment : Fragment() {
     lateinit var name : TextView
     lateinit var desc : TextView
+    lateinit var tag : TextView
     lateinit var seek : SeekBar
     lateinit var seekText : TextView
     lateinit var rating: RatingBar
@@ -46,6 +47,7 @@ class AddRecipeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        tag = view.findViewById(R.id.main_tag)
         name = view.findViewById(R.id.edit_name)
         desc = view.findViewById(R.id.edit_desc)
         seek = view.findViewById(R.id.seekBar)
@@ -65,13 +67,51 @@ class AddRecipeFragment : Fragment() {
             }
 
         })
+        val recipeList = RecipeJsonManager.getRecipeListFromJson(requireContext())
 
         val button = view.findViewById<Button>(R.id.add_button)
+        val editRecipe :Recipe? = arguments?.getParcelable<Recipe>("recipe")
+        if (editRecipe != null) {
+            tag.text = "Zaktualizuj"
+            name.setText(editRecipe.nazwa)
+            desc.setText(editRecipe.opis)
+            seekText.text = "trudność: ${editRecipe.trudnosc}"
+            seek.progress = editRecipe.trudnosc
+            rating.rating = editRecipe.rating
+
+            button.text = "Zaktualizuj przepis"
+        }
+
         button.setOnClickListener{
-            recipe = Recipe(name.text.toString(), seekInt, rating.rating, desc.text.toString())
-            RecipeJsonManager.addRecipeToListJson(requireContext(), recipe)
+            if (editRecipe != null){
+
+                val updatedRecipe = Recipe(
+                    id = editRecipe.id,
+                    nazwa = name.text.toString(),
+                    trudnosc = seek.progress,
+                    rating = rating.rating,
+                    opis = desc.text.toString()
+                )
+                val index = recipeList.indexOfFirst { it.id == editRecipe.id }
+                if (index != -1) {
+                    recipeList[index] = updatedRecipe
+                    recipe = updatedRecipe
+                }
+                RecipeJsonManager.editRecipeList(requireContext(), recipeList)
+            }else {
+                recipe = Recipe(
+                    recipeList.size,
+                    name.text.toString(),
+                    seekInt,
+                    rating.rating,
+                    desc.text.toString()
+                )
+                RecipeJsonManager.addRecipeToListJson(requireContext(), recipe)
+            }
             listener.onDataPass(recipe, "add")
         }
+
+
     }
 
     companion object {
