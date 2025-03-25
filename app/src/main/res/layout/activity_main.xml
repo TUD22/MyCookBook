@@ -32,25 +32,26 @@
           android:textColor="#FFFFFF"
           android:textFontWeight="20"
           android:textSize="20sp"
-          android:layout_gravity="center_vertical"/>
+          android:layout_gravity="center_vertical"
+          android:layout_weight="1"/>
 
       <Switch
           android:layout_gravity="center_vertical"
           android:id="@+id/themeSwitch"
-          android:layout_width="match_parent"
+          android:layout_width="wrap_content"
           android:layout_height="wrap_content"/>
 
    </LinearLayout>
 
    <FrameLayout
        android:layout_width="match_parent"
-       android:layout_height="match_parent">
+       android:layout_height="wrap_content">
 
       <androidx.fragment.app.FragmentContainerView
           android:id="@+id/main_fragment"
           android:name="com.example.mycookbook.RecipeListFragment"
           android:layout_width="match_parent"
-          android:layout_height="match_parent"
+          android:layout_height="wrap_content"
            />
          <LinearLayout
              android:background="#2E2D2D"

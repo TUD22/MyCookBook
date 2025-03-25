@@ -1,5 +1,6 @@
 package com.example.mycookbook
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -50,11 +51,24 @@ class MainActivity : AppCompatActivity(), DataPassInterface {
         val sharedPreferences = getSharedPreferences("pref", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         switch.isChecked = (sharedPreferences.getBoolean("isOn", false))
-        var color = if(switch.isChecked) R.color.purple else R.color.yellow
+        var color =0
+        if(switch.isChecked){
+            color = R.color.purple
+            button.setTextColor(getColor(R.color.white))
+        }else{
+            color = R.color.yellow
+            button.setTextColor(getColor(R.color.black))
+        }
         button.setBackgroundColor(getColor(color))
 
         switch.setOnClickListener{
-            color = if(switch.isChecked) R.color.purple else R.color.yellow
+            if(switch.isChecked){
+                color = R.color.purple
+                button.setTextColor(getColor(R.color.white))
+            } else{
+                color = R.color.yellow
+                button.setTextColor(getColor(R.color.black))
+            }
             button.setBackgroundColor(getColor(color))
             editor.putBoolean("isOn", switch.isChecked)
             editor.apply()

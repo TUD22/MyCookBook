@@ -29,6 +29,9 @@ object RecipeJsonManager {
     fun getRecipeListFromJson(context: Context): MutableList<Recipe> {
         val gson = Gson()
         val file = File(context.filesDir, FILE_NAME)
+        if (!file.exists()) {
+            file.writeText("[]")
+        }
         val json = file.readText()
         val type = object : TypeToken<MutableList<Recipe>>() {}.type
         return  gson.fromJson(json, type) ?: mutableListOf()

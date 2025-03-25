@@ -9,11 +9,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ListView
 import android.widget.RatingBar
 import android.widget.TextView
 
 
 class RecipeDetailsFragment : Fragment() {
+    lateinit var lista: MutableList<String>
     lateinit var name : TextView
     lateinit var desc : TextView
     lateinit var ratingBar: RatingBar
@@ -72,6 +74,11 @@ class RecipeDetailsFragment : Fragment() {
         deleteButton.setOnClickListener{
             showAlertDialog()
         }
+        lista = recipe.skladniki
+        val ingridientList: ListView = view.findViewById(R.id.details_ingridient_list)
+        val adapter = IngridientAdapter(requireContext(), R.layout.ingridient, lista, "details")
+        ingridientList.adapter = adapter
+        adapter.notifyDataSetChanged()
     }
 
     private fun showAlertDialog() {
@@ -107,7 +114,6 @@ class RecipeDetailsFragment : Fragment() {
     }
 
     fun updateData(recipe: Recipe) {
-        Log.i("abcd", "a")
         name.text=recipe.nazwa
         desc.text=recipe.opis
         seekText.text= "trudność: ${recipe.trudnosc}"

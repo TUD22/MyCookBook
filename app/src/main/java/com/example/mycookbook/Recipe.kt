@@ -8,14 +8,16 @@ data class Recipe(
     var nazwa: String,
     var trudnosc: Int,
     var rating: Float,
-    var opis: String
+    var opis: String,
+    var skladniki: MutableList<String>
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString()?: "",
         parcel.readInt(),
         parcel.readFloat(),
-        parcel.readString()?: ""
+        parcel.readString()?: "",
+        parcel.createStringArrayList() ?: mutableListOf()
     ) {
     }
 
@@ -29,6 +31,7 @@ data class Recipe(
         parcel.writeInt(trudnosc)
         parcel.writeFloat(rating)
         parcel.writeString(opis)
+        parcel.writeStringList(skladniki)
     }
 
     companion object CREATOR : Parcelable.Creator<Recipe> {

@@ -1,59 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".RecipeDetailsFragment">
-    <LinearLayout
+    android:fillViewport="true">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        tools:context=".RecipeDetailsFragment">
+
+        <!-- Twój layout, w tym elementy takie jak TextView, RatingBar, itd. -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:textAlignment="center"
+                android:id="@+id/name"
+                android:layout_weight="8"/>
+
+            <Button
+                android:id="@+id/edit_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#D09A1C"
+                android:layout_marginEnd="5dp"
+                android:text="Edytuj" />
+            <Button
+                android:id="@+id/delete_button"
+                android:layout_marginEnd="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#D09A1C"
+                android:text="Usuń" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/seek_text"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+        <RatingBar
+            android:id="@+id/rating"
+            android:layout_marginStart="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:progressTint="#D09A1C"
+            android:progressBackgroundTint="#414143"
+            android:isIndicator="true"/>
+
         <TextView
             android:layout_width="wrap_content"
+            android:text="• wino"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:textAlignment="center"
-            android:id="@+id/name"
-            android:layout_weight="8"/>
+            android:layout_marginStart="10dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"/>
 
-        <Button
-            android:id="@+id/edit_button"
-            android:layout_width="wrap_content"
+        <ListView
+            android:id="@+id/details_ingridient_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:minHeight="300dp"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="0dp" />
+
+        <TextView
+            android:layout_margin="10dp"
+            android:id="@+id/desc"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#D09A1C"
-            android:layout_marginEnd="5dp"
-            android:text="Edytuj" />
-        <Button
-            android:id="@+id/delete_button"
-            android:layout_marginEnd="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#D09A1C"
-            android:text="Usuń" />
+            android:textSize="20sp"/>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/seek_text"
-        android:textSize="20sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="trudność: "/>
-
-    <RatingBar
-        android:id="@+id/rating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:numStars="5"
-        android:progressTint="#D09A1C"
-        android:progressBackgroundTint="#414143"
-        android:isIndicator="true"/>
-    <TextView
-        android:id="@+id/desc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"/>
-
-
-
-</LinearLayout>
+</androidx.core.widget.NestedScrollView>
