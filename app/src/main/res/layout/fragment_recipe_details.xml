@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true">
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         tools:context=".RecipeDetailsFragment">
 
-        <!-- Twój layout, w tym elementy takie jak TextView, RatingBar, itd. -->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -61,30 +54,24 @@
             android:progressTint="#D09A1C"
             android:progressBackgroundTint="#414143"
             android:isIndicator="true"/>
+            <ListView
+                android:id="@+id/details_ingridient_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:minHeight="300dp"
+                android:divider="@android:color/transparent"
+                android:dividerHeight="0dp"/>
+            <TextView
+                android:layout_margin="10dp"
+                android:id="@+id/desc"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:text="• wino"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:textColor="@color/black"
-            android:textSize="20sp"/>
 
-        <ListView
-            android:id="@+id/details_ingridient_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:minHeight="300dp"
-            android:divider="@android:color/transparent"
-            android:dividerHeight="0dp" />
 
-        <TextView
-            android:layout_margin="10dp"
-            android:id="@+id/desc"
-            android:textColor="@color/black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"/>
-    </LinearLayout>
 
-</androidx.core.widget.NestedScrollView>
+</LinearLayout>
+
+
